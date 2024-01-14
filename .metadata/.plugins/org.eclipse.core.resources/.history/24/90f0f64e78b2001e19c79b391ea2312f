@@ -54,7 +54,7 @@ public class Main {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		String InterestedPersonName = sc.nextLine().trim();
+		String InterestedPersonName = sc.nextLine();
 		String InterestedPersonEmail = sc.nextLine();
 		byte InterestedPersonAge = sc.nextByte();
 		float InterestedPersonHeigth = sc.nextFloat();
@@ -70,22 +70,10 @@ public class Main {
 		people.add(interested);
 		
 		for (int i = 0; i < people.size(); i++) {
-			File saveFile = new File(i + "-" + InterestedPersonName.toUpperCase().replace(" ", "") + ".txt");
+			File saveFile = new File(i + InterestedPersonName.toUpperCase() + ".txt");
 			
 			try {
 				FileWriter fwOnSavedFile = new FileWriter(saveFile);
-				
-				String tempByte = String.valueOf(InterestedPersonAge);
-				String tempFloat = String.valueOf(InterestedPersonHeigth);
-				
-				fwOnSavedFile.write(InterestedPersonName);
-				fwOnSavedFile.write(System.lineSeparator());
-				fwOnSavedFile.write(InterestedPersonEmail);
-				fwOnSavedFile.write(System.lineSeparator());
-				fwOnSavedFile.write(tempByte);
-				fwOnSavedFile.write(System.lineSeparator());
-				fwOnSavedFile.write(tempFloat);
-
 				
 				fwOnSavedFile.flush();
 				fwOnSavedFile.close();

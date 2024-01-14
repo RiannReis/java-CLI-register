@@ -54,7 +54,7 @@ public class Main {
 		
 		Scanner sc = new Scanner(System.in);
 		
-		String InterestedPersonName = sc.nextLine().trim();
+		String InterestedPersonName = sc.nextLine();
 		String InterestedPersonEmail = sc.nextLine();
 		byte InterestedPersonAge = sc.nextByte();
 		float InterestedPersonHeigth = sc.nextFloat();
