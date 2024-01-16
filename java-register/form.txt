@@ -1,5 +1,5 @@
 Insert below in order:
-Your complete name; 
-Your email; 
-Your age; 
-Your heigth (m); 
+1 - Your complete name; 
+2 - Your email address; 
+3 - Your age; 
+4 - Your heigth (m); 
