@@ -23,6 +23,7 @@ public class Main {
 	private static ArrayList<InterestedPerson> people = new ArrayList<>();
 	private static ArrayList<String> questions = new ArrayList<>();
 
+
 	public static void main(String[] args) {
 
 		Locale.setDefault(Locale.US);
@@ -154,9 +155,9 @@ public class Main {
 			System.out.println("Pergunta Inválida! Insira outro número: ");
 			number = Integer.parseInt(sc.nextLine());
 		}
-
+		
 		String fileTempName = "fileTemp" + System.currentTimeMillis() + ".txt";
-
+		
 		File fileTemp = new File(fileTempName);
 		String line = "";
 		try {
@@ -164,66 +165,48 @@ public class Main {
 			FileWriter fw = new FileWriter(fileTemp);
 			BufferedReader br = new BufferedReader(fr);
 			int count = 0;
-
+			
 			while ((line = br.readLine()) != null) {
 				if (count != number) {
 					fw.write(line);
 					fw.write(System.lineSeparator());
 				}
 				count++;
-
+				
 			}
 			fw.flush();
 			fw.close();
 			br.close();
-
+			
 			try {
-				Files.delete(Paths.get("form.txt"));
-				System.out.println("Arquivo deletado com sucesso");
-				Files.move(Paths.get(fileTempName), Paths.get("form.txt"), StandardCopyOption.REPLACE_EXISTING);
-				System.out.println("Arquivo renomeado com sucesso");
+			    Files.delete(Paths.get("form.txt")); 
+			    System.out.println("Arquivo deletado com sucesso");
+			    Files.move(Paths.get(fileTempName), Paths.get("form.txt"), StandardCopyOption.REPLACE_EXISTING);
+			    System.out.println("Arquivo renomeado com sucesso");
 			} catch (IOException e) {
-				e.printStackTrace();
+			    e.printStackTrace();
 			}
-
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public static void searchInterestedPeople() {
-
+		
 		System.out.println("Insira o dado da pessoa que deseja buscar: ");
-
+		
 		String personData = sc.nextLine();
-
+		
 		for (InterestedPerson interestedPerson : people) {
-
+			
 			if (interestedPerson.getName().contains(personData)) {
-				System.out.println(interestedPerson.getName());
-
+				System.out.println(interestedPerson);
+				
 			}
-
+			
 		}
-
-		for (InterestedPerson interestedPerson : people) {
-
-			if (interestedPerson.getEmail().contains(personData)) {
-				System.out.println(interestedPerson.getName());
-
-			}
-
-		}
-
-		for (InterestedPerson interestedPerson : people) {
-
-			if (interestedPerson.getAge() == personData.getBytes()[0]) {
-				System.out.println(interestedPerson.getName());
-
-			}
-
-		}
-
+		
 	}
 
 	public static void showQuestions() {
@@ -257,7 +240,7 @@ public class Main {
 			while ((i = fr.read()) != -1) {
 				System.out.print((char) i);
 			}
-
+			
 			fr.close();
 		} catch (IOException e) {
 			e.printStackTrace();
