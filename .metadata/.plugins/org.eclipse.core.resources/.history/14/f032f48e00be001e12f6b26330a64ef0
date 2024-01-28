@@ -15,12 +15,14 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import co.riannreis.entities.InterestedPerson;
+import co.riannreis.exception.RegisterException;
 
 public class Main {
 
 	private static File file = new File("form.txt");
 	private static Scanner sc = new Scanner(System.in);
 	private static ArrayList<InterestedPerson> people = new ArrayList<>();
+	private static ArrayList<String> questions = new ArrayList<>();
 
 	public static void main(String[] args) {
 
@@ -76,38 +78,30 @@ public class Main {
 	}
 
 	public static void registerInterestedPeople() {
-		String InterestedPersonName = sc.nextLine().trim();
-		
-		if (InterestedPersonName.length() < 10) {
-			throw new IllegalArgumentException("O nome deve ter no mínimo 10 caracteres");
+		String InterestedPersonName;
+		try {
+			InterestedPersonName = sc.nextLine().trim();
+			validateNameData(InterestedPersonName);
+			
+		} catch (RegisterException e) {
+			System.out.println(e.getMessage());
+			sc.nextLine();
 		}
 		
-		String InterestedPersonEmail = sc.nextLine();
+		String InterestedPersonEmail;
 		
-		if (!InterestedPersonEmail.contains("@")) {
-			throw new IllegalArgumentException("O e-mail deve conter o caractere @");
-		}
+		do {
+			
+			InterestedPersonEmail = sc.nextLine();
+			
+		} while (!InterestedPersonEmail.contains("@"));
 		
 		byte InterestedPersonAge = Byte.parseByte(sc.nextLine());
 		
-		if (InterestedPersonAge < 18) {
-			throw new IllegalArgumentException("O usuário deve ter mais de 18 anos");
-		}
-
 		float InterestedPersonHeigth = Float.parseFloat(sc.nextLine());
-		
-		if (InterestedPersonHeigth % 1 == 0) {
-			throw new NumberFormatException("A altura deve ser um número com ponto");
-		}
-		
+
 		InterestedPerson interested = new InterestedPerson(InterestedPersonName, InterestedPersonEmail,
 				InterestedPersonAge, InterestedPersonHeigth);
-		
-		for (InterestedPerson person : people) {
-			if (person.getEmail().equals(InterestedPersonEmail)) {
-				throw new IllegalArgumentException("O e-mail já está cadastrado");
-			}
-		}
 
 		people.add(interested);
 
@@ -304,5 +298,13 @@ public class Main {
 		}
 
 		return lines;
+	}
+	
+	public static void validateNameData(String name) {
+		
+		if(name.length() < 10) {
+			throw new RegisterException("Nome deve ter mais que 10 caracteres");
+		}
+		
 	}
 }

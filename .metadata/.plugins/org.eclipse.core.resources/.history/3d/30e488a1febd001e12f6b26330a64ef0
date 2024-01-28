@@ -21,6 +21,7 @@ public class Main {
 	private static File file = new File("form.txt");
 	private static Scanner sc = new Scanner(System.in);
 	private static ArrayList<InterestedPerson> people = new ArrayList<>();
+	private static ArrayList<String> questions = new ArrayList<>();
 
 	public static void main(String[] args) {
 
@@ -77,37 +78,12 @@ public class Main {
 
 	public static void registerInterestedPeople() {
 		String InterestedPersonName = sc.nextLine().trim();
-		
-		if (InterestedPersonName.length() < 10) {
-			throw new IllegalArgumentException("O nome deve ter no mínimo 10 caracteres");
-		}
-		
 		String InterestedPersonEmail = sc.nextLine();
-		
-		if (!InterestedPersonEmail.contains("@")) {
-			throw new IllegalArgumentException("O e-mail deve conter o caractere @");
-		}
-		
 		byte InterestedPersonAge = Byte.parseByte(sc.nextLine());
-		
-		if (InterestedPersonAge < 18) {
-			throw new IllegalArgumentException("O usuário deve ter mais de 18 anos");
-		}
-
 		float InterestedPersonHeigth = Float.parseFloat(sc.nextLine());
-		
-		if (InterestedPersonHeigth % 1 == 0) {
-			throw new NumberFormatException("A altura deve ser um número com ponto");
-		}
-		
+
 		InterestedPerson interested = new InterestedPerson(InterestedPersonName, InterestedPersonEmail,
 				InterestedPersonAge, InterestedPersonHeigth);
-		
-		for (InterestedPerson person : people) {
-			if (person.getEmail().equals(InterestedPersonEmail)) {
-				throw new IllegalArgumentException("O e-mail já está cadastrado");
-			}
-		}
 
 		people.add(interested);
 

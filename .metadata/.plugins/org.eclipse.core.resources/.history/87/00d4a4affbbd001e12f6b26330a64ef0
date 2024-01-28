@@ -1,0 +1,5 @@
+package co.riannreis.exception;
+
+public class RegisterException {
+
+}

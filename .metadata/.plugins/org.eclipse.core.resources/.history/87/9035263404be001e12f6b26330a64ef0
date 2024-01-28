@@ -96,10 +96,6 @@ public class Main {
 
 		float InterestedPersonHeigth = Float.parseFloat(sc.nextLine());
 		
-		if (InterestedPersonHeigth % 1 == 0) {
-			throw new NumberFormatException("A altura deve ser um número com ponto");
-		}
-		
 		InterestedPerson interested = new InterestedPerson(InterestedPersonName, InterestedPersonEmail,
 				InterestedPersonAge, InterestedPersonHeigth);
 		
